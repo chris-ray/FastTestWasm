@@ -1,0 +1,33 @@
+﻿@namespace FastTestWasm.Components
+
+@inherits FluentComponentBase
+<FluentTreeItem Id="@Id"
+                Class="@ClassValue"
+                Style="@StyleValue"
+                Disabled="@Disabled"
+                @bind-Expanded="@Expanded"
+                tabindex="-1"
+                Text="@(NavMenuExpanded ? Text : string.Empty)"
+                @onclick="@OnClickHandlerAsync">
+    @if (!NavMenuExpanded)
+    {
+        <FluentIcon Name="@IconNavMenuCollapsed" Size="@IconSize.Size20" Slot="start" OnClick="ExpandMenu" />
+    }
+    @if (NavMenuExpanded && !string.IsNullOrEmpty(IconCollapsed))
+    {
+        <FluentIcon Name="@IconCollapsed" Size="@IconSize.Size20" state="Collapsed" Slot="expand-collapse-glyph" />
+    }
+    @if (NavMenuExpanded && !string.IsNullOrEmpty(IconExpanded))
+    {
+        <FluentIcon Name="@IconExpanded" Size="@IconSize.Size20" state="Expanded" Slot="expand-collapse-glyph" />
+    }
+    @if (NavMenuExpanded)
+    {
+        @ChildContent
+    }
+    @if (Expanded)
+    {
+        <div> expanded !</div>
+    }
+
+</FluentTreeItem>
